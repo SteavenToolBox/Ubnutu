@@ -3,15 +3,16 @@ RUN=1 # run flag
 while [ $RUN = 1 ] # while run flag equals 1 - reopening menu after each action
 do
   clear
-  echo ======================================================
-  echo "SteavenToolbox 0.1 | We care about your pc!" "Ubuntu"
-  echo ======================================================
+  echo =================================================
+  echo "SteavenToolbox | We care about your pc!" "Ubuntu"
+  echo =================================================
   echo "1. Update Ubuntu"
   echo "2. Install Needed Ubuntu Apps"
   echo "3. Replace Snap Store with Gnome Software"
   echo "4. Install ZSH with Power10k and zsh autocompilte"
   echo "5. Install i3"
   echo "6. Purge Remove SNAP"
+  echo "7. Install Stock Gnome + Stock Gnome Theme"
   echo "0. Exit"
   read -p "Type the number." ANSWER
 
@@ -82,6 +83,16 @@ do
   sudo snap remove snapd-desktop-integration
   sudo snap remove snapd
   sudo apt purge snapd -y
+  fi
+  if [ $ANSWER == "7" ]; then
+  sudo apt install adwaita-icon-theme-full adwaita-icon-theme adwaita-qt6 adwaita-qt gnome-session -y
+  rm -rf ~/.config/gtk-2.0
+  rm -rf ~/.config/gtk-3.0
+  rm -rf ~/.config/gtk-4.0
+  gsettings set org.gnome.desktop.interface color-scheme default
+  gsettings set org.gnome.desktop.interface gtk-theme Adwaita
+  gsettings set org.gnome.desktop.wm.preferences theme Adwaita
+  gsettings set org.gnome.desktop.interface icon-theme Adwaita
   fi
   else
     echo "Quitting..."
