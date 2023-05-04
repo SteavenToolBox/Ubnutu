@@ -14,6 +14,7 @@ do
   echo "6. Purge Remove SNAP"
   echo "7. Install Stock Gnome + Stock Gnome Theme"
   echo "8. Remove Ubuntu Apt ADS"
+  echo "9. Gnome Libadwaita Theme for GTK3"
   echo "0. Exit"
   read -p "Type the number." ANSWER
 
@@ -99,6 +100,15 @@ do
   sudo pro config set apt_news=false
   mkdir -p ~/relocated_apt
   sudo mv /etc/apt/apt.conf.d/20apt-esm-hook.conf ~/relocated_apt/.
+  fi
+  if [ $ANSWER == "9" ]; then
+  wget https://github.com/lassekongo83/adw-gtk3/releases/download/v4.6/adw-gtk3v4-6.tar.xz
+  sudo unzip adw-gtk3v4-6.tar.xz -d "/usr/share/themes"
+  gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
+  gsettings set org.gnome.desktop.interface color-scheme default
+  sudo snap install adw-gtk3-theme
+  for i in $(snap connections | grep gtk-common-themes:gtk-3-themes | awk '{print $2}'); do sudo snap connect $i adw-gtk3-theme:gtk-3-themes; done
+  flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark -y
   fi
   else
     echo "Quitting..."
