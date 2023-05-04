@@ -9,7 +9,7 @@ do
   echo "1. Update Ubuntu"
   echo "2. Install Needed Ubuntu Apps"
   echo "3. Replace Snap Store with Gnome Software"
-  echo "4. Install ZSH with Power10k and zsh autocompilte"
+  echo "4. Install ZSH with Power10k and zsh autocomplete"
   echo "5. Install i3"
   echo "6. Purge Remove SNAP"
   echo "7. Install Stock Gnome + Stock Gnome Theme"
