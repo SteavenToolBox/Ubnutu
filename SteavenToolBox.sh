@@ -15,6 +15,7 @@ do
   echo "7. Install Stock Gnome + Stock Gnome Theme"
   echo "8. Remove Ubuntu Apt ADS"
   echo "9. Gnome Libadwaita Theme for GTK3"
+  echo "10. Flatpak GTK Theme Fix"
   echo "0. Exit"
   read -p "Type the number." ANSWER
 
@@ -109,6 +110,16 @@ do
   sudo snap install adw-gtk3-theme
   for i in $(snap connections | grep gtk-common-themes:gtk-3-themes | awk '{print $2}'); do sudo snap connect $i adw-gtk3-theme:gtk-3-themes; done
   flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark -y
+  sudo mkdir /var/lib/flatpak/overrides
+  sudo touch /var/lib/flatpak/overrides/global
+  echo "[Context]" | sudo tee -a /var/lib/flatpak/overrides/global
+  echo "filesystems=xdg-config/gtk-3.0;xdg-config/gtk-4.0" | sudo tee -a /var/lib/flatpak/overrides/global  
+  fi
+  if [ $ANSWER == "10" ]; then
+  sudo mkdir /var/lib/flatpak/overrides
+  sudo touch /var/lib/flatpak/overrides/global
+  echo "[Context]" | sudo tee -a /var/lib/flatpak/overrides/global
+  echo "filesystems=xdg-config/gtk-3.0;xdg-config/gtk-4.0" | sudo tee -a /var/lib/flatpak/overrides/global
   fi
   else
     echo "Quitting..."
