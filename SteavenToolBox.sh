@@ -13,6 +13,7 @@ do
   echo "5. Install i3"
   echo "6. Purge Remove SNAP"
   echo "7. Install Stock Gnome + Stock Gnome Theme"
+  echo "8. Remove Ubuntu Apt ADS"
   echo "0. Exit"
   read -p "Type the number." ANSWER
 
@@ -93,6 +94,11 @@ do
   gsettings set org.gnome.desktop.interface gtk-theme Adwaita
   gsettings set org.gnome.desktop.wm.preferences theme Adwaita
   gsettings set org.gnome.desktop.interface icon-theme Adwaita
+  fi
+  if [ $ANSWER == "8" ]; then
+  sudo pro config set apt_news=false
+  mkdir -p ~/relocated_apt
+  sudo mv /etc/apt/apt.conf.d/20apt-esm-hook.conf ~/relocated_apt/.
   fi
   else
     echo "Quitting..."
